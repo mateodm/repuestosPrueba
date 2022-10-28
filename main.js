@@ -15,10 +15,7 @@ div.innerHTML = `
 </div>
 `
 ubicacionProductos.appendChild(div)
-
 })
-
-const filtroPrecio = stock.filter(producto => producto.precio > 8000);
 
 
 const buscadorProductos = document.querySelector("#buscador");
@@ -50,9 +47,46 @@ document.addEventListener("click" e => {
 /* SORT MAYOR A MENOR - MENOR A MAYOR (POR AHORA SOLO FUNCIONA EN CONSOLA)*/
 function menorSort() {
     stock.sort((a,b) => a.precio - b.precio);
-    console.log(stock)
+    return producto
 }
 function mayorSort() {
     stock.sort((a,b) => b.precio - a.precio);
     console.log(stock)
 }
+
+/* CARRITO */
+let carrito = [];
+if(localStorage.getItem("carrito")) {
+    carrito = JSON.parse(localStorage.getItem("carrito"))
+}
+    function agregarAlCarrito(id) {
+    const producto = stock.find((producto) => producto.id === id);
+    const productoEnElCarrito = carrito.find((producto) => producto.id === id )
+    if(productoEnElCarrito){
+        productoEnElCarrito.nDeProductos++;
+    }
+    else {
+        carrito.push(producto);
+        localStorage.setItem("carrito",JSON.stringify(carrito));
+    }
+    }
+
+
+    const estructuraCarrito = document.getElementById("estructuraCarrito");
+    carrito.forEach((producto) => {
+        const filaProducto = document.createElement("div")
+        filaProducto.classList.add("col-12")
+        filaProducto.innerHTML = `
+            <div class="col">
+                <div class="row text-muted">${producto.categoria}</div>
+            <div class="row">${producto.nombre} Cantidad: ${producto.nDeProductos}</div>
+            </div>
+            <div class="col">
+                <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+            </div>
+            <div class="col"> ${producto.precio} <span class="close">&#10005;</span></div>
+            </div>
+            `
+    estructuraCarrito.appendChild(filaProducto);
+    })
+

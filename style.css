@@ -26,6 +26,9 @@
 .contenedor-carrito {
     margin-left: 5vw;
 }
+.imagen-carrito {
+    height: 4vh;
+}
 .contenedor-repuestos {
     margin-bottom: 20vh;
 }
@@ -35,3 +38,9 @@
 .filtro {
     display: none;
 }
+.carritoTemporal {
+    display: grid;
+    justify-content: center;
+    padding-bottom: 40px;
+    font-size: 2.4vh;
+ }

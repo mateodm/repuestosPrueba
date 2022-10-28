@@ -1,3 +1,14 @@
+
+class Producto {
+    constructor(id, nombre, precio, img) {
+        this.id = id;
+        this.nombre = nombre; 
+        this.precio = precio;
+        this.img = img;
+        this.nDeProductos = 1; 
+    }
+}
+
 let stock = [
     {id: 1, nombre: "Tornillo", categoria: "pieza", cantidad: 1, precio: 6000, img:"./imagenes/logotemp-pagina.gif"},
     {id: 2, nombre: "Tuerca", categoria: "pieza",cantidad: 1, precio: 8000, img:"./imagenes/logotemp-pagina.gif"},
