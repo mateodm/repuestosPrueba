@@ -20,20 +20,25 @@
     align-items: center;
     margin-top: 3vh;
 }
-.buscador {
-    margin-left: 18vw;
-}
 .contenedor-carrito {
     margin-left: 5vw;
+}
+.buscador {
+    margin-left: 16vw;
 }
 .imagen-carrito {
     height: 4vh;
 }
+.card-imagen {
+    height: 20vh;
+    width: 8vw;
+    border-bottom: solid 1px grey;
+}
+.carrito-imagen {
+    width: 6vw;
+}
 .contenedor-repuestos {
     margin-bottom: 20vh;
-}
-.buscador_size {
-    padding: 10vw;
 }
 .filtro {
     display: none;
@@ -44,3 +49,6 @@
     padding-bottom: 40px;
     font-size: 2.4vh;
  }
+.tacho:hover {
+    opacity: 0.6;
+}

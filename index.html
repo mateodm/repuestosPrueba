@@ -36,16 +36,16 @@
         <a class="contenedor-carrito" href="./carrito.html"><img class="imagen-carrito"src="./imagenes/carrito.png" alt="carrito"></a>
       </nav>
     </section>
-
-        </header>
-    <main>
-      <section class="row"> <!-- Buscador -->
-        <div class="buscador col-md-8">
-          <input id="buscador" class="form-control me-2 buscador_size my-2" type="text" placeholder="Ingrese el nombre del producto" aria-label="Buscar">
-          <button id="botonBuscador" class="btn btn-outline-success my-2" type="submit">Buscar</button>
-        </div>
-      </section>
-      <section class="row">  <!-- Filtros -->
+  </header>
+  <main>
+    <section class="row"> <!-- Buscador -->
+      <div class="buscador col-md-8">
+        <input id="buscador" class="form-control me-2 buscador_size my-2" type="text" placeholder="Ingrese el nombre del producto" aria-label="Buscar">
+        <button id="botonBuscador" class="btn btn-outline-success my-2" type="submit">Buscar</button>
+      </div>
+    </section>
+      <!-- Filtros 
+      <section class="row">  
         <div class="col-md-12 d-flex justify-content-center my-4">
           <button id = "categoria" class="btn btn-primary mx-2 botonCategoria">Piezas</button>
           <button id = "categoria" class="btn btn-primary mx-2 botonCategoria">Electronica</button>
@@ -56,20 +56,25 @@
           <button onclick="menorSort()" id = "menor" class="btn btn-primary mx-2 botonCategoria">Ordenar desde el precio más bajo</button>
           <button onclick="mayorSort()"id = "mayor" class="btn btn-primary mx-2 botonCategoria">Ordenar desde el precio más alto</button>
         </div>
-      </section> 
+      </section>  -->
+
       <section class="container contenedor-repuestos"> 
         <div id="cardsProductos" class="row gx-4 gx-lg-5 row-cols-4 row-cols-md-4 row-cols-xl-4 justify-content-center"></div>
       </section>
     <!-- CARRITO PRUEBA -->
       <section class="carritoTemporal">
-        <b>Carrito de compras (reiniciar para ver productos)</b>
-      <div id="estructuraCarrito" class="row"> 
-
-
-
+        <b class="d-grid justify-content-center">Carrito de compras (reiniciar para ver productos)</b>
+      <div id="estructuraCarrito" class="row my-4"> 
       </div>
-    </section>
-    </main>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary btn-lg">Realizar la compra</button>
+      </div>
+      </div>
+      </div>
+      </div>
+      </section>
+      </section>
+  </main>
     
 </body>
 <script src="./stock.js"></script>

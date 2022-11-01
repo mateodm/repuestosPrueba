@@ -1,23 +1,4 @@
 
-const ubicacionProductos = document.getElementById("cardsProductos")
-stock.forEach((producto) => {
-const div = document.createElement("div")
-div.classList.add("producto")
-div.innerHTML = `
-<div class="card col-md-12 mb-4">
-<img id="imagen" src=${producto.img} class="card-img-top" alt="Panel Led Indoor 100w"/>
-<div class="card-body">
-<h5 id="nombre" class="card-title"> ${producto.nombre}</h5>
-<h5 style="display: none;"> ${producto.categoria} </h5>
-<p id="precio" class="card-text card-precio"> $${producto.precio} ars</p>
-<button onclick="agregarAlCarrito(${producto.id})" class="btn d-block btn-primary botones_productos">Agregar al carrito</button>
-</div>
-</div>
-`
-ubicacionProductos.appendChild(div)
-})
-
-
 const buscadorProductos = document.querySelector("#buscador");
 
 /* BUSCADOR PRODUCTOS */
@@ -54,7 +35,7 @@ function mayorSort() {
     console.log(stock)
 }
 
-/* CARRITO */
+/* CARRITO LOCAL STORAGE(ARRAY) */
 let carrito = [];
 if(localStorage.getItem("carrito")) {
     carrito = JSON.parse(localStorage.getItem("carrito"))
@@ -69,24 +50,70 @@ if(localStorage.getItem("carrito")) {
         carrito.push(producto);
         localStorage.setItem("carrito",JSON.stringify(carrito));
     }
+    window.location.reload()
     }
 
-
     const estructuraCarrito = document.getElementById("estructuraCarrito");
+
+
+    /* CARRITO FUNCION */
     carrito.forEach((producto) => {
         const filaProducto = document.createElement("div")
-        filaProducto.classList.add("col-12")
         filaProducto.innerHTML = `
-            <div class="col">
-                <div class="row text-muted">${producto.categoria}</div>
-            <div class="row">${producto.nombre} Cantidad: ${producto.nDeProductos}</div>
+        <div class="row">
+            <div class="col-md-1"> </div>
+            <div class="card col-md-10 mb-4">
+            <div class="card-body p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-2">
+                        <img class="carrito-imagen img-fluid" src="${producto.img}" alt="${producto.nombre}">
+                    </div>
+                <div class="col-md-2 d-flex justify-content-center">
+                    <div>
+                        <p class="small text-muted mb-4 pb-2">Nombre</p>
+                        <p class="lead fw-normal mb-0">${producto.nombre}</p>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex justify-content-center">
+                    <div>
+                        <p class="small text-muted mb-4 pb-2">Cantidad</p>
+                        <p class="lead fw-normal mb-0">${producto.cantidad}</p>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex justify-content-center">
+                    <div>
+                        <p class="small text-muted mb-4 pb-2">Precio</p>
+                        <p class="lead fw-normal mb-0">${producto.precio}</p>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex justify-content-center">
+                    <div>
+                        <p class="small text-muted mb-4 pb-2">Total</p>
+                        <p class="lead fw-normal mb-0"></p>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex justify-content-center">
+                    <div>
+                        <img id="borrar${producto.id}" class="tacho"style="width: 5vh; margin-top: 2vh;" src="./imagenes/tachobasura.png">
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-            </div>
-            <div class="col"> ${producto.precio} <span class="close">&#10005;</span></div>
-            </div>
+      </div>
+    </div>
             `
     estructuraCarrito.appendChild(filaProducto);
+    /* Borrar producto según ID del carrito */
+    const borrarCarrito = document.getElementById(`borrar${producto.id}`)
+    borrarCarrito.addEventListener("click", () => {
+        eliminarProductoCarrito(producto.id)
+    })
     })
 
+/* Función que borra producto del carrito según el ID */
+const eliminarProductoCarrito = (id) => {
+    const elemento = carrito.find((producto) => producto.id === id)
+    const posicion = carrito.indexOf(elemento);
+    carrito.splice(posicion, 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    window.location.reload()
+}
