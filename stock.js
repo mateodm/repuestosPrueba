@@ -20,23 +20,64 @@ let stock = [
     {id: 8, nombre: "Repuesto8", categoria: "undefined", cantidad: 1, precio: 1500, img:"./imagenes/logotemp-pagina.gif"},
     
 ]
+
 const ubicacionProductos = document.getElementById("cardsProductos")
-    stock.forEach((producto) => {
-    const div = document.createElement("div")
-    div.classList.add("producto")
-    div.innerHTML = `
-        <div class="card col-md-12 mb-4">
-            <img id="imagen" src=${producto.img} class="card-imagen card-img-top my-3" alt="Panel Led Indoor 100w"/>
-        <div class="card-body">
-            <h5 id="nombre" class="card-title"> ${producto.nombre}</h5>
-            <h5 style="display: none;"> ${producto.categoria} </h5>
-            <p id="precio" class="card-text card-precio"> $${producto.precio} ars</p>
-            <button onclick="agregarAlCarrito(${producto.id})" class="btn d-block btn-primary botones_productos">Agregar al carrito</button>
-        </div>
-        </div>
-`
-ubicacionProductos.appendChild(div)
+
+let copiaArray = stock.slice()
+function restock() {
+  stock = copiaArray;
+  return stock;
+}
+/*
+function creadorProductos(sort) {
+    stock.forEach(producto => {
+      const div = document.createElement("div");
+      div.classList.add("producto")
+      div.innerHTML = `
+          <div class="card col-md-12 mb-4">
+              <img id="imagen" src=${producto.img} class="card-imagen card-img-top my-3" alt="Panel Led Indoor 100w"/>
+          <div class="card-body">
+              <h5 id="nombre" class="card-title"> ${producto.nombre}</h5>
+              <h5 style="display: none;"> ${producto.categoria} </h5>
+              <p id="precio" class="card-text card-precio"> $${producto.precio} ars</p>
+              <button onclick="agregarAlCarrito(${producto.id})" class="btn d-block btn-primary botones_productos">Agregar al carrito</button>
+          </div>
+          </div>
+  `
+      switch (sort) {
+        case 'mayor':
+          ubicacionProductos.appendChild(div.mayorSort);
+          break;
+  
+        case 'menor':
+          ubicacionProductos.appendChild(div.menorSort);
+          break;
+  
+        default:
+          ubicacionProductos.appendChild(div);
+          break;
+      }
+  
+    })
+  }
+  */
+
+  function creadorProductos(){ 
+    stock.map((producto) => {
+      const div = document.createElement("div")
+      div.classList.add("producto")
+      div.innerHTML = `
+          <div class="card col-md-12 mb-4">
+              <img id="imagen" src=${producto.img} class="card-imagen card-img-top my-3" alt="Panel Led Indoor 100w"/>
+          <div class="card-body">
+              <h5 id="nombre" class="card-title"> ${producto.nombre}</h5>
+              <h5 style="display: none;"> ${producto.categoria} </h5>
+              <p id="precio" class="card-text card-precio"> $${producto.precio} ars</p>
+              <button onclick="agregarAlCarrito(${producto.id})" class="btn d-block btn-primary botones_productos">Agregar al carrito</button>
+          </div>
+          </div>
+  `
+  ubicacionProductos.appendChild(div)
 })
-
-
-
+}
+creadorProductos()

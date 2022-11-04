@@ -46,14 +46,13 @@
     </section>
       
       <section class="row">  
-        <!-- Filtros 
         <div class="col-md-12 d-flex justify-content-center my-4">
-          <button id = "categoria" class="btn btn-primary mx-2 botonCategoria">Piezas</button>
-          <button id = "categoria" class="btn btn-primary mx-2 botonCategoria">Electronica</button>
-          <button id = "categoria" class="btn btn-primary mx-2 botonCategoria">Carroceria</button>
-          <button id = "categoria" class="btn btn-primary mx-2 botonCategoria">Undefined</button>
+          <button onclick = "productosTotales()"  id = "categoria" class="btn btn-primary mx-2 botonCategoria">Todos los productos</button>
+          <button onclick = "filtroCategoria('pieza')"  id = "categoria" class="btn btn-primary mx-2 botonCategoria">Piezas</button>
+          <button onclick = "filtroCategoria('electronica')" id = "categoria" class="btn btn-primary mx-2 botonCategoria">Electronica</button>
+          <button onclick = "filtroCategoria('carroceria')" id = "categoria" class="btn btn-primary mx-2 botonCategoria">Carroceria</button>
+          <button onclick = "filtroCategoria('undefined')" id = "categoria" class="btn btn-primary mx-2 botonCategoria">Undefined</button>
         </div> 
-      -->
         <div class="col-md-12 d-flex justify-content-center my-4">
           <button onclick="menorSort()" id = "menor" class="btn btn-primary mx-2 botonCategoria">Ordenar desde el precio más bajo</button>
           <button onclick="mayorSort()"id = "mayor" class="btn btn-primary mx-2 botonCategoria">Ordenar desde el precio más alto</button>
