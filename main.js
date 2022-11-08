@@ -10,12 +10,18 @@ document.addEventListener("keyup", e => {
         })
     }
 })
-/* CATEGORIAS */
+/* Filtro categorias y marcas */
 function filtroCategoria(categoria) {
     restock();
     stock = stock.filter((producto) => producto.categoria.toLowerCase() === categoria);
     ubicacionProductos.innerHTML = '';
     creadorProductos();
+}
+function filtroMarca(marca) {
+    restock();
+    stock = stock.filter((producto) => producto.marca.toLowerCase() === marca);
+    ubicacionProductos.innerHTML = '';
+    creadorProductos()
 }
 
 
