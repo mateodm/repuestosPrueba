@@ -1,4 +1,3 @@
-
 const buscadorProductos = document.querySelector("#buscador");
 
 /* BUSCADOR PRODUCTOS */
@@ -11,7 +10,7 @@ document.addEventListener("keyup", e => {
         })
     }
 })
-
+/* CATEGORIAS */
 function filtroCategoria(categoria) {
     restock();
     stock = stock.filter((producto) => producto.categoria.toLowerCase() === categoria);
@@ -26,24 +25,7 @@ function productosTotales() {
     creadorProductos();
 }
 
-/*
-function filtroCategoria(categoria) {
-
-    const ubicacionCategoria = document.getElementById(`categoria_${categoria}`);
-
-    let stockFiltrado = [];
-
-    const filtroProductos = stock.filter(c => c.categoria === categoria);
-
-    stockFiltrado.push(filtroProductos)
-    
-
-    ubicacionCategoria.appendChild(stockFiltrado);
-    return;
-}
-*/
-
-/* SORT MAYOR A MENOR - MENOR A MAYOR (POR AHORA SOLO FUNCIONA EN CONSOLA)*/
+/* SORT MAYOR A MENOR - MENOR A MAYOR */
 function menorSort() {
     stock.sort((a,b) => a.precio - b.precio);
     ubicacionProductos.innerHTML = ""
@@ -56,6 +38,8 @@ function mayorSort() {
     creadorProductos()
     return;
 }
+                        /* SECCIÓN CARRITO */
+
 
 /* CARRITO LOCAL STORAGE(ARRAY) */
 let carrito = [];
@@ -65,27 +49,44 @@ function agregarAlCarrito(id) {
     const producto = stock.find((producto) => producto.id === id);
     const productoEnElCarrito = carrito.find((producto) => producto.id === id);
 
-    if (!productoEnElCarrito) {
-    
-        carrito.push(producto);
+    if (productoEnElCarrito) {
+        productoEnElCarrito.cantidad++;
         localStorage.setItem("carrito",JSON.stringify(carrito));
-        
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Añadiste más de este producto',
+            showConfirmButton: false,
+            timer: 800
+          })
     }
-
-    productoEnElCarrito.nDeProductos++;
-    
-    window.location.reload();
+    else {
+        carrito.push(producto);
+        localStorage.setItem("carrito",JSON.stringify(carrito)); 
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Añadiste un producto al carrito',
+                showConfirmButton: false,
+                timer: 800
+              })
+    }
+    mostrarCarrito()
+    carritoLength()
+    totalProductos()
 }
 
-const estructuraCarrito = document.getElementById("estructuraCarrito");
+const estructuraCarrito = document.getElementById("carritoGenerar");
 
 
     /* CARRITO FUNCION */
-carrito.map((producto) => {
+function mostrarCarrito() {
+    borrarCardCarrito()
+    carrito.map((producto) => {
     const filaProducto = document.createElement("div")
     filaProducto.innerHTML = `
-    <div class="row">
-        <div class="col-md-1"> </div>
+    <div id="borrarProducto" class="row">
+    <div class="col-md-1"> </div>
         <div class="card col-md-10 mb-4">
         <div class="card-body p-4">
             <div class="row align-items-center">
@@ -101,19 +102,19 @@ carrito.map((producto) => {
             <div class="col-md-2 d-flex justify-content-center">
                 <div>
                     <p class="small text-muted mb-4 pb-2">Cantidad</p>
-                    <p class="lead fw-normal mb-0">${producto.cantidad}</p>
+                    <p id="cantidadP" class="lead fw-normal mb-0">${producto.cantidad}</p>
                 </div>
             </div>
             <div class="col-md-2 d-flex justify-content-center">
                 <div>
                     <p class="small text-muted mb-4 pb-2">Precio</p>
-                    <p class="lead fw-normal mb-0">${producto.precio}</p>
+                    <p class="lead fw-normal mb-0">${producto.precio} ars</p>
                 </div>
             </div>
             <div class="col-md-2 d-flex justify-content-center">
                 <div>
-                    <p class="small text-muted mb-4 pb-2">Total</p>
-                    <p class="lead fw-normal mb-0"></p>
+                    <p class="small text-muted mb-4 pb-2">Categoria</p>
+                    <p class="lead fw-normal mb-0">${producto.categoria}</p>
                 </div>
             </div>
             <div class="col-md-2 d-flex justify-content-center">
@@ -123,26 +124,56 @@ carrito.map((producto) => {
             </div>
         </div>
     </div>
-</div>
+    </div>
         `
     estructuraCarrito.appendChild(filaProducto);
     
     /* Borrar producto según ID del carrito */
     const borrarCarrito = document.getElementById(`borrar${producto.id}`)
-    borrarCarrito.addEventListener("click", () => { eliminarProductoCarrito(producto.id) })
+    borrarCarrito.addEventListener("click", () => { eliminarProductoCarrito(producto.id)
+     })
+    })
+}
 
-
-
-})
 
 /* Función que borra producto del carrito según el ID */
 const eliminarProductoCarrito = (id) => {
     const elemento = carrito.find((producto) => producto.id === id);
     const posicion = carrito.indexOf(elemento);
+            carrito.splice(posicion, 1);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            mostrarCarrito()
+            carritoLength()
+            totalProductos()
+}
 
-    carrito.splice(posicion, 1);
+const montoTotal = document.getElementById("montoTotal")
+const totalProductos = () => {
+    let precioProductoTotal = 0
+    carrito.map((producto) => {
+    precioProductoTotal += producto.precio * producto.cantidad;
+    })
+    if (precioProductoTotal == 0) {
+        montoTotal.innerHTML = `No hay ningún producto en el carrito en este momento.`
+    }
+    else {
+    montoTotal.innerHTML = `El monto total a pagar es de: $${precioProductoTotal} ars`
+    }
+}
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+/* Borrar card carritos para que no se dupliquen al cerrar el modal */
+function borrarCardCarrito() {
+    estructuraCarrito.innerHTML = ``
+}
 
+/* Contador Carrito */
+function carritoLength() {
+    let contador = carrito.length
+    const contadorUbicacion = document.getElementById("contadorCarrito")
+    contadorUbicacion.innerHTML = `${contador}`
+}
+function reloadWindow() {
     window.location.reload()
 }
+totalProductos()
+carritoLength()
