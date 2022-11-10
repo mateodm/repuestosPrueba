@@ -85,7 +85,7 @@ function agregarAlCarrito(id) {
 const estructuraCarrito = document.getElementById("carritoGenerar");
 
 
-    /* CARRITO FUNCION */
+    /* CARRITO CARD FUNCION */
 function mostrarCarrito() {
     borrarCardCarrito()
     carrito.map((producto) => {
@@ -108,7 +108,7 @@ function mostrarCarrito() {
             <div class="col-md-2 d-flex justify-content-center">
                 <div>
                     <p class="small text-muted mb-4 pb-2">Cantidad</p>
-                    <p id="cantidadP" class="lead fw-normal mb-0">${producto.cantidad}</p>
+                    <p id="cantidadP" class="lead fw-normal mb-0">${producto.cantidad}<img onclick="sumarCantidad()" class="mas-carrito" src="./imagenes/mas.png"></p>
                 </div>
             </div>
             <div class="col-md-2 d-flex justify-content-center">
@@ -146,12 +146,21 @@ function mostrarCarrito() {
 const eliminarProductoCarrito = (id) => {
     const elemento = carrito.find((producto) => producto.id === id);
     const posicion = carrito.indexOf(elemento);
-            carrito.splice(posicion, 1);
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-            mostrarCarrito()
-            carritoLength()
-            totalProductos()
+            if(elemento.cantidad > 1) {
+                elemento.cantidad--
+                mostrarCarrito()
+                carritoLength()
+                totalProductos()
+            }
+            else {
+                carrito.splice(posicion, 1);
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+                mostrarCarrito()
+                carritoLength()
+                totalProductos()
+            }
 }
+/* SUMA TOTAL PRODUCTO * CANTIDAD  */
 
 const montoTotal = document.getElementById("montoTotal")
 const totalProductos = () => {
@@ -178,8 +187,22 @@ function carritoLength() {
     const contadorUbicacion = document.getElementById("contadorCarrito")
     contadorUbicacion.innerHTML = `${contador}`
 }
-function reloadWindow() {
-    window.location.reload()
+function sumarCantidad() {
+    const sumarC = carrito.find((producto) => producto.cantidad)
+    sumarC.cantidad++
+    mostrarCarrito()
+    totalProductos()
 }
+
 totalProductos()
 carritoLength()
+
+
+
+
+
+
+
+
+
+
