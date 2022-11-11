@@ -164,6 +164,10 @@ header {
     text-decoration: none;
 
 }
+.menos-carrito {
+    height: 2.6vh;
+    margin-right: 0.5vh;
+}
 
 .mas-carrito-boton {
     text-decoration: none;
