@@ -11,9 +11,9 @@ class Producto {
 }
 
 let stock = [
-    { id: 1, nombre: "Tornillo", marca: "Generica", categoria: "Pieza", cantidad: 1, codigo: "N/A", precio: 100, img: "./imagenes/tornillo.png" },
-    { id: 2, nombre: "Tuerca", marca: "Generica", categoria: "Pieza", cantidad: 1, codigo: "N/A", precio: 120, img: "./imagenes/tuerca.png" },
-    { id: 3, nombre: "Bateria", marca: "Generica", categoria: "Electronica", codigo: "N/A", cantidad: 1, precio: 8000, img: "./imagenes/bateria.png" },
+    { id: 1, nombre: "Tornillo", marca: "Generica", categoria: "Pieza", cantidad: 1, codigo: "asd", precio: 100, img: "./imagenes/tornillo.png" },
+    { id: 2, nombre: "Tuerca", marca: "Generica", categoria: "Pieza", cantidad: 1, codigo: "DEF12", precio: 120, img: "./imagenes/tuerca.png" },
+    { id: 3, nombre: "Bateria", marca: "Generica", categoria: "Electronica", codigo: "alv", cantidad: 1, precio: 8000, img: "./imagenes/bateria.png" },
     { id: 4, nombre: "Espejo retrovisor", marca: "Ford", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 16000, img: "./imagenes/espejoretrovisor.png" },
     { id: 5, nombre: "Moldura", marca: "Nissan", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 18000, img: "./imagenes/moldura.png" },
     { id: 6, nombre: "Parachoques delantero", marca: "Chevrolet", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 15900, img: "./imagenes/parachoques.png" },
@@ -27,6 +27,26 @@ let stock = [
     { id: 14, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
     { id: 15, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
     { id: 16, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 17, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 18, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 19, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 20, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 21, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 22, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 23, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 24, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 25, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 26, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 27, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 28, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 29, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 30, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 31, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 32, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 33, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 34, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 35, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
+    { id: 36, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
 
 
 ]
@@ -40,6 +60,9 @@ function restock() {
 
 
 function creadorProductos() {
+    ubicacionProductos.innerHTML= ""
+    stock = stock.slice(indice, cantidadPorPagina)
+    console.log(stock)
     stock.map((producto) => {
         const div = document.createElement("div")
         div.classList.add("producto", "col-xl-3", "col-lg-4", "col-md-6", "col-sm-12")
@@ -59,4 +82,49 @@ function creadorProductos() {
         ubicacionProductos.appendChild(div)
     })
 }
+const ubicacionPaginas = document.getElementById("paginasBoton");
+let cantidadPorPagina = 16
+let paginaInicial = 0;
+let paginaCantidad = Math.round((stock.length + 9) / cantidadPorPagina);
+let indice = 0
+
+/* PAGINADOR CADA 16 PRODUCTOS*/
+function paginador() {
+    ubicacionPaginas.innerHTML = ""
+    for (let i = 0; i < paginaCantidad; i++) {
+        paginaInicial++
+        const li = document.createElement("li")
+        li.classList.add("page-link")
+        li.innerHTML = 
+        `
+        <h5 onclick="stringPagina(${paginaInicial})">${paginaInicial}</h5>
+        `
+        ubicacionPaginas.appendChild(li)
+    }
+}
+function invocarPaginador() {
+    paginaCantidad = Math.round((stock.length + 9) / cantidadPorPagina)
+    paginaInicial = 0
+    paginador()
+    creadorProductos()
+}
+function stringPagina(id) {
+        if (id === 1) {
+            cantidadPorPagina = 16
+            indice = 0
+            ubicacionProductos.innerHTML= ""
+            creadorProductos()
+        }
+        else {
+            cantidadPorPagina = id * 16
+            indice = cantidadPorPagina/2
+            ubicacionProductos.innerHTML= ""
+            creadorProductos()
+            
+        }
+    }
+
+
+
+paginador()
 creadorProductos()
