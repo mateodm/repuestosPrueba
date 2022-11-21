@@ -1,3 +1,7 @@
+const ubicacionPaginas = document.getElementById("paginasBoton");
+let cantidadPorPagina = 16
+let indice = 0
+
 
 class Producto {
     constructor(id, nombre, precio, img) {
@@ -59,10 +63,10 @@ function restock() {
 }
 
 
-function creadorProductos() {
-    stock = stock.slice(indice, cantidadPorPagina)
-    console.log(stock)
-    stock.map((producto) => {
+function creadorProductos(array) {
+    array = array.slice(indice, cantidadPorPagina)
+    ubicacionProductos.innerHTML = ""
+    array.map((producto) => {
         const div = document.createElement("div")
         div.classList.add("producto", "col-xl-3", "col-lg-4", "col-md-6", "col-sm-12")
         div.innerHTML = `
@@ -81,17 +85,27 @@ function creadorProductos() {
         ubicacionProductos.appendChild(div)
     })
 }
-const ubicacionPaginas = document.getElementById("paginasBoton");
-let cantidadPorPagina = 16
-let paginaInicial = 0;
-let paginaCantidad = Math.round((stock.length + 9) / cantidadPorPagina);
-let indice = 0
-let categoriaPagina = 1
+let Pages = [];
+const ArrayPaginador = (array, cantidad) => {
+    while (array.length) {
+        const Product = array.slice(0, cantidad);
+        array = array.slice(cantidad);
 
-/* PAGINADOR CADA 16 PRODUCTOS*/
+        Pages.push(Product);
+    }
+
+    let obj = {};
+  
+    Pages.map((_, i) => obj[`Página_${i+1}`] = Pages[i]);
+    return obj;
+};
+
+
+
 function paginador() {
     ubicacionPaginas.innerHTML = ""
-    for (let i = 0; i < paginaCantidad; i++) {
+    let paginaInicial = 0
+    Pages.map(() => {
         paginaInicial++
         const li = document.createElement("li")
         li.classList.add("page-link")
@@ -99,29 +113,32 @@ function paginador() {
         `
         <h5 onclick="stringPagina(${paginaInicial})">${paginaInicial}</h5>
         `
-        ubicacionPaginas.appendChild(li)
+        ubicacionPaginas.appendChild(li)  
     }
-}
-function stringPagina(id) {
+    )
+    }
+    function stringPagina(id) {
         if (id === 1) {
-            restock()
             cantidadPorPagina = 16
             indice = 0
             ubicacionProductos.innerHTML= ""
-            creadorProductos()
+            creadorProductos(stock)
         }
         else if (id > 1) {
-            restock()
             cantidadPorPagina = id * 16
             indice = cantidadPorPagina/2
-            paginaInicial = 0
             ubicacionProductos.innerHTML= ""
-            creadorProductos()
-            paginador()
+            creadorProductos(stock)
         }
     }
+    function filtrosPaginador(array, cantidad) {
+        Pages = []
+        console.log(Pages)
+        creadorProductos(array)
+        ArrayPaginador(array, cantidad)
+        paginador()
+    }
 
-
-
+ArrayPaginador(stock, 16)
 paginador()
-creadorProductos()
+creadorProductos(stock)

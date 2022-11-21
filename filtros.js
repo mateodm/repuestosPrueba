@@ -22,10 +22,11 @@ function busquedaCodigo() {
 function filtroCategoria(categoria) {
     restock();
     stock = stock.filter((producto) => producto.categoria.toLowerCase() === categoria);
+    categoria = stock
     ubicacionProductos.innerHTML = '';
     let chequearCategoria = stock.length
     if (chequearCategoria >= 1) {
-        creadorProductos();
+        creadorProductos(categoria);
     }
     else if (chequearCategoria = 0){
         Toastify({
@@ -35,14 +36,17 @@ function filtroCategoria(categoria) {
             position: "right",
         }).showToast();
     }
+    filtrosPaginador(categoria, 16)
 }
 function filtroMarca(marca) {
     restock();
     stock = stock.filter((producto) => producto.marca.toLowerCase() === marca);
+    marca = stock
     ubicacionProductos.innerHTML = '';
     let chequearMarca = stock.length
+    paginador()
     if (chequearMarca >= 1) {
-    creadorProductos()
+    creadorProductos(marca)
     }
     else {
         Toastify({
@@ -52,17 +56,26 @@ function filtroMarca(marca) {
             position: "right",
         }).showToast();
     }
+    filtrosPaginador(marca, 16)
 }
 /* SORT MAYOR A MENOR - MENOR A MAYOR */
 function menorSort() {
     stock.sort((a, b) => a.precio - b.precio);
+    sortMenor = stock
     ubicacionProductos.innerHTML = ""
-    creadorProductos()
+    filtrosPaginador(sortMenor, 16)
     return;
 }
 function mayorSort() {
     stock.sort((a, b) => b.precio - a.precio);
+    sortMayor = stock
     ubicacionProductos.innerHTML = ""
-    creadorProductos()
+    filtrosPaginador(sortMayor, 16)
     return;
+}
+/* TODOS LOS PRODUCTOS  */
+function productosTotales() {
+    restock();
+    ubicacionProductos.innerHTML = '';
+    creadorProductos(stock);
 }
