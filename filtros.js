@@ -16,6 +16,7 @@ function busquedaCodigo() {
     const contenidoCodigo = textoBuscador.value.toLowerCase()
     stock = stock.filter((producto) => producto.codigo.toLowerCase() === contenidoCodigo.toString());
     ubicacionProductos.innerHTML = '';
+    creadorProductos()
 }
 /* Filtro categorias y marcas */
 function filtroCategoria(categoria) {
@@ -23,7 +24,6 @@ function filtroCategoria(categoria) {
     stock = stock.filter((producto) => producto.categoria.toLowerCase() === categoria);
     ubicacionProductos.innerHTML = '';
     let chequearCategoria = stock.length
-    invocarPaginador()
     if (chequearCategoria >= 1) {
         creadorProductos();
     }
@@ -41,7 +41,6 @@ function filtroMarca(marca) {
     stock = stock.filter((producto) => producto.marca.toLowerCase() === marca);
     ubicacionProductos.innerHTML = '';
     let chequearMarca = stock.length
-    invocarPaginador()
     if (chequearMarca >= 1) {
     creadorProductos()
     }

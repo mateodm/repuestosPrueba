@@ -60,7 +60,6 @@ function restock() {
 
 
 function creadorProductos() {
-    ubicacionProductos.innerHTML= ""
     stock = stock.slice(indice, cantidadPorPagina)
     console.log(stock)
     stock.map((producto) => {
@@ -87,6 +86,7 @@ let cantidadPorPagina = 16
 let paginaInicial = 0;
 let paginaCantidad = Math.round((stock.length + 9) / cantidadPorPagina);
 let indice = 0
+let categoriaPagina = 1
 
 /* PAGINADOR CADA 16 PRODUCTOS*/
 function paginador() {
@@ -102,25 +102,22 @@ function paginador() {
         ubicacionPaginas.appendChild(li)
     }
 }
-function invocarPaginador() {
-    paginaCantidad = Math.round((stock.length + 9) / cantidadPorPagina)
-    paginaInicial = 0
-    paginador()
-    creadorProductos()
-}
 function stringPagina(id) {
         if (id === 1) {
+            restock()
             cantidadPorPagina = 16
             indice = 0
             ubicacionProductos.innerHTML= ""
             creadorProductos()
         }
-        else {
+        else if (id > 1) {
+            restock()
             cantidadPorPagina = id * 16
             indice = cantidadPorPagina/2
+            paginaInicial = 0
             ubicacionProductos.innerHTML= ""
             creadorProductos()
-            
+            paginador()
         }
     }
 
