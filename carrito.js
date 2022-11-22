@@ -1,10 +1,6 @@
 const buscadorProductos = document.querySelector("#buscador");
 
-function productosTotales() {
-    restock();
-    ubicacionProductos.innerHTML = '';
-    creadorProductos();
-}
+
 
 /* SECCIÓN CARRITO */
 

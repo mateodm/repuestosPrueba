@@ -15,8 +15,9 @@ function busquedaCodigo() {
     restock();
     const contenidoCodigo = textoBuscador.value.toLowerCase()
     stock = stock.filter((producto) => producto.codigo.toLowerCase() === contenidoCodigo.toString());
+    codigo = stock
     ubicacionProductos.innerHTML = '';
-    creadorProductos()
+    filtrosPaginador(codigo, 16)
 }
 /* Filtro categorias y marcas */
 function filtroCategoria(categoria) {
@@ -26,7 +27,7 @@ function filtroCategoria(categoria) {
     ubicacionProductos.innerHTML = '';
     let chequearCategoria = stock.length
     if (chequearCategoria >= 1) {
-        creadorProductos(categoria);
+        filtrosPaginador(categoria, 16)
     }
     else if (chequearCategoria = 0){
         Toastify({
@@ -36,7 +37,6 @@ function filtroCategoria(categoria) {
             position: "right",
         }).showToast();
     }
-    filtrosPaginador(categoria, 16)
 }
 function filtroMarca(marca) {
     restock();
@@ -46,7 +46,7 @@ function filtroMarca(marca) {
     let chequearMarca = stock.length
     paginador()
     if (chequearMarca >= 1) {
-    creadorProductos(marca)
+        filtrosPaginador(marca, 16)
     }
     else {
         Toastify({
@@ -57,6 +57,7 @@ function filtroMarca(marca) {
         }).showToast();
     }
     filtrosPaginador(marca, 16)
+    
 }
 /* SORT MAYOR A MENOR - MENOR A MAYOR */
 function menorSort() {
@@ -75,7 +76,6 @@ function mayorSort() {
 }
 /* TODOS LOS PRODUCTOS  */
 function productosTotales() {
-    restock();
-    ubicacionProductos.innerHTML = '';
-    creadorProductos(stock);
+    restock()
+    filtrosPaginador(stock, 16)
 }

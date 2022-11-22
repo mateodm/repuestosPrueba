@@ -1,18 +1,8 @@
 const ubicacionPaginas = document.getElementById("paginasBoton");
+const ubicacionProductos = document.getElementById("cardsProductos")
 let cantidadPorPagina = 16
 let indice = 0
-
-
-class Producto {
-    constructor(id, nombre, precio, img) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.img = img;
-        this.marca = marca;
-        this.codigo = codigo;
-    }
-}
+let Pages = [];
 
 let stock = [
     { id: 1, nombre: "Tornillo", marca: "Generica", categoria: "Pieza", cantidad: 1, codigo: "asd", precio: 100, img: "./imagenes/tornillo.png" },
@@ -51,17 +41,12 @@ let stock = [
     { id: 34, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
     { id: 35, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
     { id: 36, nombre: "Insignia BMW", marca: "BMW", categoria: "Carroceria", codigo: "N/A", cantidad: 1, precio: 13200, img: "./imagenes/insignia.jpg" },
-
-
 ]
-
-const ubicacionProductos = document.getElementById("cardsProductos")
-
 let copiaArray = stock.slice()
+
 function restock() {
     stock = copiaArray;
 }
-
 
 function creadorProductos(array) {
     array = array.slice(indice, cantidadPorPagina)
@@ -85,7 +70,7 @@ function creadorProductos(array) {
         ubicacionProductos.appendChild(div)
     })
 }
-let Pages = [];
+/* PÁGINAS */
 const ArrayPaginador = (array, cantidad) => {
     while (array.length) {
         const Product = array.slice(0, cantidad);
@@ -99,8 +84,6 @@ const ArrayPaginador = (array, cantidad) => {
     Pages.map((_, i) => obj[`Página_${i+1}`] = Pages[i]);
     return obj;
 };
-
-
 
 function paginador() {
     ubicacionPaginas.innerHTML = ""
@@ -133,10 +116,11 @@ function paginador() {
     }
     function filtrosPaginador(array, cantidad) {
         Pages = []
-        console.log(Pages)
-        creadorProductos(array)
         ArrayPaginador(array, cantidad)
+        creadorProductos(array)
         paginador()
+        stringPagina(1) 
+
     }
 
 ArrayPaginador(stock, 16)
